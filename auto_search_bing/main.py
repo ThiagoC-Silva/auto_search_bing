@@ -1,22 +1,18 @@
-from os import getenv
 from time import sleep
-from dotenv import load_dotenv
-from settings import InitWebDriver
-
-load_dotenv()
+from .settings import InitWebDriver
+from .pages.home_bing import BingLoginPage
 
 
 def main():
     init_driver = InitWebDriver()
     browser_webdriver = init_driver.browser_webdriver
 
-    email_address = getenv("EMAIL_ADDRESS")
-    password = getenv("PASSWORD")
+    bing = BingLoginPage(browser_webdriver)
+    bing.login_microsoft()
 
-    browser_webdriver.get("https://www.bing.com/?cc=br")
     sleep(5)
-
     init_driver.quit_driver()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()
