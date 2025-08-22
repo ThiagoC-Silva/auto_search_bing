@@ -11,16 +11,14 @@ from selenium.common.exceptions import TimeoutException, InvalidSessionIdExcepti
 load_dotenv()
 
 
-class BingLoginPage:
+class BingPages:
     def __init__(self, web_driver):
         self.web_driver = web_driver
-        self.url = "https://www.bing.com/?cc=br"
+        self.url = "https://login.live.com"
         # Elements from page
-        self.enter_button_id = "id_l"
         self.email_input_id = "usernameEntry"
         self.password_input_id = "passwordEntry"
         self.close_button_id = "close-button"
-        self.entry_form_xpath = "//div[@aria-label='Use sua senha']"
         # Credentials
         self.email_address = getenv("EMAIL_ADDRESS")
         self.password = getenv("PASSWORD")
@@ -29,11 +27,6 @@ class BingLoginPage:
         try:
             # Open the Bing login page
             self.web_driver.get(self.url)
-            # Element waiting and interaction
-            enter_button = wait_clickable_element(
-                self.web_driver, By.ID, self.enter_button_id
-            )
-            enter_button.click()
 
             email_input_field = wait_visible_element(
                 self.web_driver, By.ID, self.email_input_id
